@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
+
+    <link rel="stylesheet" href="../static/frontend/styles.css">
+<link rel="stylesheet" href="../static/frontend/index.css">
+
+
+<main class="file-form">
+<!--class="file-form__select-file"-->
+    <input type="file" id="file" multiple  accept="image/*" >
+    <label for="file" class="file-form__select-file_label">Choose files</label>
+    <button type="submit" class="file-form__button file-form__button_predict custom" id="predict">Predict</button>
+    <button type="submit" class="file-form__button file-form__button_clear custom" id="clear">Clear</button>
+    <span class="file-form__files filecount" id="number-of-files"></span>
+
+</main>
+    <div class="predicted" >
+        <div id="preview">
+        Timeline
+            </div>
+    </div>
+<script src="../static/frontend/main.js"></script>
+
+{% endblock content %}

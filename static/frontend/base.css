@@ -1,0 +1,19 @@
+nav{
+background: #DC2424;  /* fallback for old browsers */!important;
+background: -webkit-linear-gradient(to right, #4A569D, #DC2424);  /* Chrome 10-25, Safari 5.1-6 */!important;
+background: linear-gradient(to right, #4A569D, #DC2424); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */!important;
+
+     }
+    .navbar-text{
+animation-name: ntext;!important;
+  animation-duration: 4s;
+animation-timing-function: ease-in-out;
+-webkit-animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    }
+    @keyframes ntext {
+  0%   {color: white;!important;}
+  25%  {color: yellow;!important;}
+  50%  {color: greenyellow;!important;}
+  100% {color: #63fff2;!important;}
+}

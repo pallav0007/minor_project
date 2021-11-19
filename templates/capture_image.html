@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TF JS example</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
+
+    <link rel="stylesheet" href="../static/frontend/styles.css">
+</head>
+<body>
+<h1 class="title">Sign Sight</h1>
+<h2 class="title">-> Choose and Upload image -> Click on predict to get image output and prediction ->Use clear to reset</h2>
+<div id="my_camera"></div>
+<div id='results'></div>
+<button type="button" onclick="snap()">snap</button>
+<main class="file-form">
+<!--class="file-form__select-file"-->
+    <input type="file" id="file" multiple  accept="image/*" >
+    <label for="file" class="file-form__select-file_label">Choose files</label>
+    <button type="submit" class="file-form__button file-form__button_predict" id="predict">Predict</button>
+    <button type="submit" class="file-form__button file-form__button_clear" id="clear">Clear</button>
+    <span class="file-form__files" id="number-of-files"></span>
+
+</main>
+<div id="preview"></div>
+<script src="../static/frontend/caputre_main.js"></script>
+</body>
+</html>

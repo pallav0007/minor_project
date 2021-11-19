@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" href="../static/frontend/real_time.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
+<div class="wrapper">
+<div class="realcamera" >
+    <div id="my_camera">
+    real camera here
+        <</div>
+</div>
+<div class="snap" >
+    <div id="results">
+    snapshot here
+        </div>
+</div>
+    <div class="lastest" >
+        <div id="lastest_result">
+        prediction here
+            </div>
+    </div>
+</div>
+
+<div class="button_wrapper">
+    <button class="snap_button btn btn-danger" type="button" onclick="snap()">snap</button>
+        <button class="predict_button btn btn-success " id="predict" >Predict</button>
+
+</div>
+    <div class="predicted" >
+        <div id="preview">
+        Timeline
+            </div>
+    </div>
+<script src="../static/frontend/real_time.js"></script>
+{% endblock content %}

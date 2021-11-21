@@ -4,13 +4,13 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-flask-cors = "*"
 numpy = "*"
-opencv-python-headless = "==4.2.0.32"
+opencv-python = "*"
 cvzone = "*"
 mediapipe = "*"
 gunicorn = "*"
 Flask = "*"
+Flask-Cors = "*"
 Pillow = "*"
 
 [dev-packages]

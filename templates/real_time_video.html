@@ -1,15 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
-
+<!--<body onLoad="start();">-->
+<link rel="stylesheet" href="{{ url_for('static', filename='real_time.css')}}" />
+<!--<link rel="stylesheet" href="../static/frontend/real_time.css">-->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
-<link rel="stylesheet" href="{{ url_for('static', filename='real_time.css')}}">
 <div class="wrapper">
 <div class="realcamera" >
     <div id="my_camera">
     real camera here
         <</div>
 </div>
+
 <div class="snap" >
     <div id="results">
     snapshot here
@@ -23,8 +25,8 @@
 </div>
 
 <div class="button_wrapper">
-    <button class="snap_button btn btn-danger" type="button" onclick="snap()">snap</button>
-        <button class="predict_button btn btn-success " id="predict" >Predict</button>
+    <button class="predict_button" id="btn" type="button" onclick="end()">end</button>
+    <button class="snap_button" id="btn2" type="button" onclick="start()">start</button>
 
 </div>
     <div class="predicted" >
@@ -32,5 +34,5 @@
         Timeline
             </div>
     </div>
-<script src="{{ url_for('static', filename='real_time.js')}}"></script>
+<script src="{{ url_for('static', filename='real_time_video.js')}}"></script>
 {% endblock content %}

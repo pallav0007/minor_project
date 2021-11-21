@@ -7,12 +7,14 @@ import numpy as np
 
 def detect_hand(img):
     detector = HandDetector(detectionCon=0.8, maxHands=2)
-    # img = cv2.imread(filename)
+    # img = cv2.imread(img)
 
     hands = detector.findHands(img, draw=False)
+    print(len(hands))
 
     if hands:
         # Hand 1
+        # print(hands[0][0])
         hand1 = hands[0]
 
         bbox1 = hand1["bbox"]  # Bounding Box info x,y,w,h
@@ -47,8 +49,9 @@ def detect_hand(img):
             endx = bbox[0] + bbox[2] + 20
 
         crop_img = img[starty:endy, startx: endx]
-        cv2.rectangle(img, (bbox[0] - 20, bbox[1] - 20), (bbox[0] + bbox[2] + 20, bbox[1] + bbox[3] + 20), (0, 255, 0),
+        c=cv2.rectangle(img, (bbox[0] - 20, bbox[1] - 20), (bbox[0] + bbox[2] + 20, bbox[1] + bbox[3] + 20), (0, 255, 0),
                       3)
+        cv2.imwrite("bbox.jpg",c)
 
         grey = cv2.cvtColor(crop_img, cv2.COLOR_BGR2GRAY)
         blur = cv2.GaussianBlur(grey, (5, 5), 2)
@@ -58,13 +61,16 @@ def detect_hand(img):
         res = cv2.flip(res, 1)
         # cv2.imshow(res)
         grey = cv2.cvtColor(crop_img, cv2.COLOR_BGR2GRAY)
-        return res
-    return img
+        return res,c
+    return None,None
 
 def image_preprocessing(res):
   res=cv2.resize(res,(100,100),interpolation=cv2.INTER_CUBIC)
   test_image = res.reshape((100, 100, 1))
   test_image = np.expand_dims(res, axis = 0)
   # print(test_image.shape)
-
   return test_image
+#
+# d=detect_hand("pallav.jpg")
+# print(d[1])
+# cv2.imwrite("bbox.jpg",d[1])

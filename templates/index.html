@@ -4,9 +4,10 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
 
-    <link rel="stylesheet" href="../static/frontend/styles.css">
-<link rel="stylesheet" href="../static/frontend/index.css">
-
+<!--    <link rel="stylesheet" href="../static/frontend/styles.css">-->
+<!--<link rel="stylesheet" href="../static/frontend/index.css">-->
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css')}}">
+<link rel="stylesheet" href="{{ url_for('static', filename='index.css')}}">
 
 <main class="file-form">
 <!--class="file-form__select-file"-->
@@ -22,6 +23,6 @@
         Timeline
             </div>
     </div>
-<script src="../static/frontend/main.js"></script>
+<script src="{{ url_for('static', filename='main.js')}}"></script>
 
 {% endblock content %}

@@ -3,7 +3,11 @@ const modelURL = 'http://localhost:5000/model';
 const preview = document.getElementById("preview");
 const lastest = document.getElementById("lastest_result");
 const predictButton = document.getElementById("predict");
-
+ navigator.getUserMedia =
+    navigator.getUserMedia ||
+    navigator.webkitGetUserMedia ||
+    navigator.mozGetUserMedia ||
+    navigator.msGetUserMedia;
 function ShowCam() {
     Webcam.set({
         width: 320,
@@ -43,6 +47,7 @@ var datauri=null;
         function snap() {
     Webcam.snap( function(data_uri) {
         // display results in page
+
         datauri=data_uri;
         var blob = dataURItoBlob(data_uri);
         const form = new FormData();
@@ -50,39 +55,43 @@ var datauri=null;
         console.log(form)
         document.getElementById('results').innerHTML =
         '<img id="image" src="'+data_uri+'"/>';
+        predict(modelURL,data_uri)
       } );
 }
-const predict = async (modelURL) => {
+const predict = async (modelURL,image) => {
+            console.log("yes predict loop")
+
     if (!model) model = await tf.loadLayersModel(modelURL);
-        var image = datauri;
+
+
         var img = dataURItoBlob(image);
 
         const data = new FormData();
         data.append('file', img);
         console.log(data)
-        const processedImage = await fetch("/api/prepare/realtime",
+        const processedImage = await fetch("/api/prepare",
             {
                 method: 'POST',
                 body: data
             }).then(response => {
                 return response.json();
             }).then(result => {
-                return result['image'];
+                return result;
             });
 
         // shape has to be the same as it was for training of the model
-        const prediction = model.predict(tf.reshape(processedImage, shape = [1, 100,100, 1]));
+        const prediction = model.predict(tf.reshape(processedImage["image"], shape = [1, 100,100, 1]));
         const characters=['1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
         const label = characters[prediction.argMax(axis = 1).dataSync()[0]];
-        renderImageLabel(img, label);
+        renderImageLabel(dataURItoBlob(processedImage["bbox"]), label);
 
 };
 
 const renderImageLabel = (img, label) => {
-    const reader = new FileReader();
+  const reader = new FileReader();
     reader.onload = () => {
         lastest.innerHTML=`<div class="image-block">
-                                      <img src="/image.png" class="image-block_loaded" id="source"/>
+                                      <img src="${reader.result}" class="image-block_loaded" id="source"/>
                                        <h2 class="image-block__label">${label}</h2>
                               </div>`;
 
@@ -93,9 +102,27 @@ const renderImageLabel = (img, label) => {
 
     };
     reader.readAsDataURL(img);
+
+
 };
-
-
-
-predictButton.addEventListener("click", () => predict(modelURL));
-
+var intervalId;
+function start() {
+    intervalId = setInterval(function(){snap();}, 2000);;
+}
+function end(){
+    clearInterval(intervalId);
+    intervalId=null;
+}
+// var intervalId;
+// function toggleInterval() {
+//   if (!intervalId) {
+//     intervalId = setInterval(function(){snap();}, 460);
+//   } else {
+//     clearInterval(intervalId);
+//     intervalId = null;
+//   }
+// }
+// setInterval(function() {
+//   snap();
+// }, 1000);
+// predictButton.addEventListener("click", () => predict(modelURL));

@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+numpy = "*"
+opencv-python = "*"
+cvzone = "*"
+mediapipe = "*"
+gunicorn = "*"
+Flask = "*"
+Flask-Cors = "*"
+Pillow = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"

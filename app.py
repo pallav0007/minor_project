@@ -9,6 +9,7 @@ from preprocessing import detect_hand,image_preprocessing
 from PIL import Image
 # from flask_ngrok import run_with_ngrok
 app = Flask(__name__,static_url_path="", static_folder="static/frontend")
+app.config['CORS_HEADERS'] = 'Content-Type'
 CORS(app)
 # run_with_ngrok(app)
 

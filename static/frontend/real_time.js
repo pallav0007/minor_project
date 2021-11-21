@@ -71,10 +71,10 @@ const predict = async (modelURL) => {
             });
 
         // shape has to be the same as it was for training of the model
-        const prediction = model.predict(tf.reshape(processedImage["image"], shape = [1, 100,100, 1]));
+        const prediction = model.predict(tf.reshape(processedImage, shape = [1, 100,100, 1]));
         const characters=['1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
         const label = characters[prediction.argMax(axis = 1).dataSync()[0]];
-        renderImageLabel(processedImage["bbox"], label);
+        renderImageLabel(img, label);
 
 };
 
@@ -82,7 +82,7 @@ const renderImageLabel = (img, label) => {
     const reader = new FileReader();
     reader.onload = () => {
         lastest.innerHTML=`<div class="image-block">
-                                      <img src="${reader.result}" class="image-block_loaded" id="source"/>
+                                      <img src="/image.png" class="image-block_loaded" id="source"/>
                                        <h2 class="image-block__label">${label}</h2>
                               </div>`;
 

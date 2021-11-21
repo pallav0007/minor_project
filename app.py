@@ -47,7 +47,7 @@ def prepare():
     img = Image.fromarray(c.astype('uint8'))
     img.save(file_object, 'PNG')
     base64img = "data:image/png;base64," + b64encode(file_object.getvalue()).decode('ascii')
-    print(base64img)
+    # print(base64img)
     return json.dumps({"image": res.tolist(),"bbox":base64img})
 @app.route('/image.png')
 def image():
@@ -94,8 +94,8 @@ def load_shards_four():
 def default_preprocessing(name):
     img=cv2.imread(name)
     res, c = detect_hand(img)
-    cv2.imwrite("raw_data.jpg", c)
-    cv2.imwrite("res.jpg", res)
+    # cv2.imwrite("raw_data.jpg", c)
+    # cv2.imwrite("res.jpg", res)
     res = image_preprocessing(res)
 
     # res = cv2.resize(img, dsize=(100,100), interpolation=cv2.INTER_CUBIC)
@@ -113,8 +113,8 @@ def preprocessing(file):
         # img=cv2.imread("pallav.jpg")
 
         res,c=detect_hand(img)
-        cv2.imwrite("raw_data.jpg",c)
-        cv2.imwrite("res.jpg", res)
+        # cv2.imwrite("raw_data.jpg",c)
+        # cv2.imwrite("res.jpg", res)
         res=image_preprocessing(res)
 
         # res = cv2.resize(img, dsize=(100,100), interpolation=cv2.INTER_CUBIC)

@@ -51,7 +51,7 @@ def detect_hand(img):
         crop_img = img[starty:endy, startx: endx]
         c=cv2.rectangle(img, (bbox[0] - 20, bbox[1] - 20), (bbox[0] + bbox[2] + 20, bbox[1] + bbox[3] + 20), (0, 255, 0),
                       3)
-        cv2.imwrite("bbox.jpg",c)
+        # cv2.imwrite("bbox.jpg",c)
 
         grey = cv2.cvtColor(crop_img, cv2.COLOR_BGR2GRAY)
         blur = cv2.GaussianBlur(grey, (5, 5), 2)

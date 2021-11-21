@@ -24,16 +24,25 @@ def detect_hand(img):
 
         fingers1 = detector.fingersUp(hand1)
 
+        # if len(hands) == 2:
+        #     hand2 = hands[1]
+        #
+        #     bbox2 = hand2["bbox"]  # Bounding Box info x,y,w,h
+        #     centerPoint2 = hand2["center"]  # center of the hand cx,cy
+        #     handType2 = hand2["type"]  # Hand Type Left or Right
+        #
+        #     fingers2 = detector.fingersUp(hand2)
+
+        bbox = bbox1
         if len(hands) == 2:
             hand2 = hands[1]
 
             bbox2 = hand2["bbox"]  # Bounding Box info x,y,w,h
-            centerPoint2 = hand2["center"]  # center of the hand cx,cy
-            handType2 = hand2["type"]  # Hand Type Left or Right
 
-            fingers2 = detector.fingersUp(hand2)
-
-        bbox = bbox1
+            # print(fingers1, fingers2)
+            # length, info, img = detector.findDistance(lmList1&#91;8], lmList2&#91;8], img) # with draw
+            bbox = [min(bbox1[0], bbox2[0]), min(bbox1[1], bbox2[1]), bbox1[2] + bbox2[2] + 20,
+                    max(bbox1[3], bbox2[3]) + 20]
         startx = 0
         starty = 0
         endx = img.shape[0]
